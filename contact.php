@@ -2,13 +2,12 @@
 <html lang="en">
 	<head>
 		<meta charset="UTF-8">
-		<meta name="keywords" content="Digital marketing agency, Digital marketing company, Digital marketing services, sass, software company">
-		<meta name="description" content="vCamp Creative Personal Service HTML Template designed for personal service.">
-      	<meta property="og:site_name" content="vCamp">
-      	<meta property="og:url" content="https://heloshape.com/">
+		<meta name="keywords" content="Otiumcards Keywords">
+		<meta name="description" content="Otiumcards Description">
+      	<meta property="og:site_name" content="Otiumcards">
+      	<meta property="og:url" content="http://otiumcards.com/contact">
       	<meta property="og:type" content="website">
-      	<meta property="og:title" content="vCamp-Creative Agency & Portfolio HTML5 Template">
-		<meta name='og:image' content='images/assets/ogg.png'>
+      	<meta property="og:title" content="Otiumcards - The future of contact">
 		<!-- For IE -->
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
 		<!-- For Resposive Device -->
