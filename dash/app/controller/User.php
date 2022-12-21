@@ -9,18 +9,9 @@
 		{
 			$this->conn = $conn;
 		}
-		public function userdata()
-		{
-			$userID = $this->getSession('userID');
-			return $this->select("SELECT * FROM sc_users WHERE userID = '$userID'", true);
-		}
-		public function auserdata($userID = '')
+		public function userData($userID = '')
 		{
 			return $this->select("SELECT * FROM sc_users WHERE userID = '$userID'");
-		}
-		public function userrole($int = '')
-		{
-			return ($int == 0) ? 'Admin' : 'Moderator' ;
 		}
 		public function checkuserwithemail($email = '')
 		{

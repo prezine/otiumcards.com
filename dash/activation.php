@@ -1,13 +1,17 @@
 <?php
   session_start();
+  include_once './app/connect.php';
   include_once './app/controller/Otium.php';
+  include_once './app/controller/Database.php';
+  include_once './app/controller/User.php';
   include_once './app/app.php';
   $otium = new Otium();
+  $db = new Database($conn);
+  $user = new Users($conn);
   $token = (empty($_GET['token'])) ? null : $_GET['token'] ;
   $token = $otium->cleanurl($token);
   if ($token == null) {
-    // header("location: ./login");
-    echo "Nothing";
+    die("You do not have any token required to be here :(");
   }
 ?>
 <!DOCTYPE html>
@@ -78,7 +82,7 @@
         <div class="media align-items-stretch justify-content-center ht-100p pos-relative">
           <div class="media-body align-items-center d-none d-lg-flex">
             <div class="mx-wd-600">
-              <img src="<?php echo APP_URL . 'assets/img/img15.png' ?>" class="img-fluid" alt="">
+              <img src="<?php echo APP_URL . 'assets/img/activator.jpeg' ?>" class="img-fluid" alt="">
             </div>
           </div><!-- media-body -->
           <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">

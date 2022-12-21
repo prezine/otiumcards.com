@@ -32,7 +32,7 @@
 			$x = str_replace("'", "`", $x);
 			return trim($x, '[]');
 		}
-		public function insert($table = '', $data)
+		public function insert($table = '', $data = '')
 		{
 			$insert = "INSERT INTO $table (". $this->getRows($data) .") VALUES (". $this->getValues($data) .")";
 			return ($this->query($insert)) ? 200 : $this->error() ;
