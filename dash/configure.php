@@ -1,8 +1,20 @@
 <?php
   session_start();
+  include_once './app/connect.php';
   include_once './app/controller/Otium.php';
-  include_once './app/app.php';
+  include_once './app/controller/Database.php';
+  include_once './app/controller/Auth.php';
+  include_once './app/controller/Hash.php';
+  include_once './app/controller/OtiumErrors.php';
+  include_once './app/controller/User.php';
+  include_once './app/controller/Contacts.php';
   $otium = new Otium();
+  $hash = new Encryption();
+  $auth = new Auth($conn);
+  $errno = new Errno($conn);
+  $user = new Users($conn);
+  $contacts = new Contacts($conn);
+  include_once './app/module/userdata.php';
   if (!isset($_SESSION['userID'])) {
     header("location: ./login");
   }
@@ -16,27 +28,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:site" content="@pandastudio">
+    <meta name="twitter:creator" content="@pandastudio">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DashForge">
+    <meta name="twitter:title" content="Otiumcard">
     <meta name="twitter:description" content="Otiumcards Dashboard">
-    <meta name="twitter:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta name="twitter:image" content="">
 
     <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/dashforge">
-    <meta property="og:title" content="DashForge">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Otiumcards">
+    <meta property="og:description" content="">
 
-    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta property="og:image" content="">
+    <meta property="og:image:secure_url" content="">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="600">
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="#">
+    <meta name="author" content="Otiumcards">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">

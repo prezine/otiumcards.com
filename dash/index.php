@@ -1,8 +1,20 @@
 <?php
   session_start();
+  include_once './app/connect.php';
   include_once './app/controller/Otium.php';
-  include_once './app/app.php';
+  include_once './app/controller/Database.php';
+  include_once './app/controller/Auth.php';
+  include_once './app/controller/Hash.php';
+  include_once './app/controller/OtiumErrors.php';
+  include_once './app/controller/User.php';
+  include_once './app/controller/Contacts.php';
   $otium = new Otium();
+  $hash = new Encryption();
+  $auth = new Auth($conn);
+  $errno = new Errno($conn);
+  $user = new Users($conn);
+  $contacts = new Contacts($conn);
+  include_once './app/module/userdata.php';
   if (!isset($_SESSION['userID'])) {
     header("location: ./login");
   }
@@ -16,27 +28,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Twitter -->
-    <meta name="twitter:site" content="@themepixels">
-    <meta name="twitter:creator" content="@themepixels">
+    <meta name="twitter:site" content="@pandastudio">
+    <meta name="twitter:creator" content="@pandastudio">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="DashForge">
+    <meta name="twitter:title" content="Otiumcard">
     <meta name="twitter:description" content="Otiumcards Dashboard">
-    <meta name="twitter:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta name="twitter:image" content="">
 
     <!-- Facebook -->
-    <meta property="og:url" content="http://themepixels.me/dashforge">
-    <meta property="og:title" content="DashForge">
-    <meta property="og:description" content="Responsive Bootstrap 4 Dashboard Template">
+    <meta property="og:url" content="">
+    <meta property="og:title" content="Otiumcard">
+    <meta property="og:description" content="">
 
-    <meta property="og:image" content="http://themepixels.me/dashforge/img/dashforge-social.png">
-    <meta property="og:image:secure_url" content="http://themepixels.me/dashforge/img/dashforge-social.png">
+    <meta property="og:image" content="">
+    <meta property="og:image:secure_url" content="">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="600">
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="">
+    <meta name="author" content="Otiumcards">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
@@ -66,7 +78,7 @@
           <div>
             <nav aria-label="breadcrumb">
               <ol class="breadcrumb breadcrumb-style1 mg-b-10">
-                <li class="breadcrumb-item"><a href="#">Hi Tom 👋🏽</a></li>
+                <li class="breadcrumb-item"><a href="#">Hi <?php echo $ln; ?> 👋🏽</a></li>
               </ol>
             </nav>
             <h4 class="mg-b-0 tx-spacing--1">Welcome to Otium Dashboard</h4>
@@ -77,16 +89,16 @@
         </div>
 
         <div class="row row-xs">
-          <div class="col-sm-6 col-lg-3">
+          <div class="col-sm-6 col-lg-4">
             <div class="card card-body">
               <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Swipped Card</h6>
               <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1,030</h3>
-                <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-success">1.2% <i class="icon ion-md-arrow-up"></i></span> than last week</p>
+                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">Nil</h3>
+                <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-success">0% <i class="icon ion-md-arrow-up"></i></span> than last week</p>
               </div>
             </div>
           </div><!-- col -->
-          <div class="col-sm-6 col-lg-3 mg-t-10 mg-sm-t-0">
+          <div class="col-sm-6 col-lg-4 mg-t-10 mg-sm-t-0">
             <div class="card card-body">
               <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Account Verified</h6>
               <div class="d-flex d-lg-block d-xl-flex align-items-end">
@@ -94,21 +106,12 @@
               </div>
             </div>
           </div><!-- col -->
-          <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
+          <div class="col-sm-6 col-lg-4 mg-t-10 mg-lg-t-0">
             <div class="card card-body">
               <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Contact Count</h6>
               <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">3,060</h3>
-                <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-danger">0.3% <i class="icon ion-md-arrow-down"></i></span> than last week</p>
-              </div>
-            </div>
-          </div><!-- col -->
-          <div class="col-sm-6 col-lg-3 mg-t-10 mg-lg-t-0">
-            <div class="card card-body">
-              <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">State Insight</h6>
-              <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1">1,650</h3>
-                <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-success">2.1% <i class="icon ion-md-arrow-up"></i></span> than last week</p>
+                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1"><?php echo $user->countTotalContacts(); ?></h3>
+                <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-danger">0% <i class="icon ion-md-arrow-down"></i></span> than last week</p>
               </div>
             </div>
           </div><!-- col -->
@@ -118,7 +121,7 @@
                 <h6 class="mg-b-0">Quick Analytics</h6>
                 <div class="tx-13 d-flex align-items-center">
                   <span class="mg-r-5">Country:</span> 
-                  <a href="#" class="d-flex align-items-center link-03 lh-0">Nigeria</a>
+                  <a href="#" class="d-flex align-items-center link-03 lh-0"><?php echo ($country == null) ? 'Unknown' : $country; ?></a>
                 </div>
               </div><!-- card-header -->
               <div class="card-body pd-0">
@@ -162,7 +165,7 @@
                 <span class="tx-color-04"><i data-feather="link" class="wd-60 ht-60"></i></span>
                 <div class="media-body mg-l-20">
                   <h6 class="mg-b-10">My Unique Otiumcard Link is:</h6>
-                  <p class="tx-color-03 mg-b-0">https://link.otiumcards.com/victory</p>
+                  <p class="tx-color-03 mg-b-0">https://otiumcards.com/dash/connect/<?php echo ($nick == null) ? $token : $nick ; ?></p>
                 </div>
               </div><!-- media -->
             </div>
@@ -181,7 +184,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Women</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0">234,769</h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('female'); ?></h4>
                     </div>
                   </div>
                   <div class="media mg-t-20 mg-sm-t-0 mg-sm-l-15 mg-md-l-40">
@@ -190,7 +193,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Men</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0">1,608,469</h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('male'); ?></h4>
                     </div>
                   </div>
                   <div class="media mg-t-20 mg-sm-t-0 mg-sm-l-15 mg-md-l-40">
@@ -199,7 +202,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Non-binary</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0">208,469</h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('custom'); ?></h4>
                     </div>
                   </div>
                 </div>
@@ -216,48 +219,21 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/05/2018</td>
-                      <td class="tx-medium text-right">ImohAndre Anselem</td>
-                      <td class="text-right tx-teal">imoh@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">CMO at Pandascrow</td>
-                    </tr>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/04/2018</td>
-                      <td class="tx-medium text-right">Precious Tom</td>
-                      <td class="text-right tx-teal">tom@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">CEO at Pandascrow</td>
-                    </tr>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/04/2018</td>
-                      <td class="tx-medium text-right">Labofa Ekpebu</td>
-                      <td class="text-right tx-teal">labofa@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">Dev at Pandascrow</td>
-                    </tr>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/04/2018</td>
-                      <td class="tx-medium text-right">Chinomnso Ugwuanya</td>
-                      <td class="text-right tx-teal">chinoms@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">Dev at Techcabal</td>
-                    </tr>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/04/2018</td>
-                      <td class="tx-medium text-right">Mercy Udoh</td>
-                      <td class="text-right tx-teal">mercy@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">Student</td>
-                    </tr>
-                    <tr>
-                      <td class="tx-color-03 tx-normal">03/04/2018</td>
-                      <td class="tx-medium text-right">Isaac David</td>
-                      <td class="text-right tx-teal">isaac@gmail.com</td>
-                      <td class="text-right tx-pink">08179600000</td>
-                      <td class="tx-medium text-right">PM at Pandascrow</td>
-                    </tr>
+                    <?php
+                      if ($contacts->fetchContactList() !== null) {
+                        $allcontacts = json_decode($contacts->fetchContactList(), true);
+                        foreach ($allcontacts as $ac) {
+                          echo 
+                          '<tr>
+                            <td class="tx-color-03 tx-normal">'. $ac['dateAdded'] .'</td>
+                            <td class="tx-medium text-right">'. $ac['contactName'] .'</td>
+                            <td class="text-right tx-teal">'. $ac['contactEmail'] .'</td>
+                            <td class="text-right tx-pink">'. $ac['contactPhone'] .'</td>
+                            <td class="tx-medium text-right">'. $ac['contactRole'] .'</td>
+                          </tr>';
+                        }
+                      }
+                    ?>
                   </tbody>
                 </table>
               </div><!-- table-responsive -->
@@ -267,19 +243,7 @@
       </div><!-- container -->
     </div><!-- content -->
 
-    <footer class="footer">
-      <div>
-        <span>&copy; 2019 DashForge v1.0.0. </span>
-        <span>Created by <a href="http://themepixels.me">ThemePixels</a></span>
-      </div>
-      <div>
-        <nav class="nav">
-          <a href="https://themeforest.net/licenses/standard" class="nav-link">Licenses</a>
-          <a href="http://themepixels.me/demo/dashforge1.1/change-log.html" class="nav-link">Change Log</a>
-          <a href="https://discordapp.com/invite/RYqkVuw" class="nav-link">Get Help</a>
-        </nav>
-      </div>
-    </footer>
+    <?php include_once './widget/footer.php'; ?>
 
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>

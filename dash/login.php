@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -26,8 +29,8 @@
     <meta property="og:image:height" content="600">
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="">
+    <meta name="author" content="PandaStudio">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.png">
@@ -70,23 +73,28 @@
             </div>
           </div><!-- media-body -->
           <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
-            <div class="wd-100p">
+            <form action="./app/module/login" method="post" class="wd-100p">
               <h3 class="tx-color-01 mg-b-5">Sign In</h3>
               <p class="tx-color-03 tx-16 mg-b-40">Welcome back! Please signin to continue.</p>
-
+              <?php 
+                if (isset($_SESSION['errorMessage'])) {
+                  echo $_SESSION['errorMessage'];
+                  unset($_SESSION['errorMessage']);
+                }
+              ?>
               <div class="form-group">
                 <label>Email address</label>
-                <input type="email" class="form-control" placeholder="yourname@yourmail.com">
+                <input type="email" name="email" class="form-control" placeholder="yourname@yourmail.com">
               </div>
               <div class="form-group">
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">Password</label>
                   <a href="./forgotpassword" class="tx-13">Forgot password?</a>
                 </div>
-                <input type="password" class="form-control" placeholder="Enter your password">
+                <input type="password" name="password" class="form-control" placeholder="Enter your password">
               </div>
-              <button class="btn btn-brand-02 btn-block">Sign In</button>
-            </div>
+              <button type="submit" class="btn btn-brand-02 btn-block">Sign In</button>
+            </form>
           </div><!-- sign-wrapper -->
         </div><!-- media -->
       </div><!-- container -->

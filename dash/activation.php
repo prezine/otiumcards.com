@@ -86,24 +86,34 @@
             </div>
           </div><!-- media-body -->
           <div class="sign-wrapper mg-lg-l-50 mg-xl-l-60">
-            <div class="wd-100p">
+            <form action="../app/module/activatecard" method="post" class="wd-100p">
               <h3 class="tx-color-01 mg-b-5">Activate your Card</h3>
               <p class="tx-color-03 tx-16 mg-b-40">Hello, Otiumite 👋🏽</p>
+              <?php 
+                if (isset($_SESSION['errorMessage'])) {
+                  echo $_SESSION['errorMessage'];
+                  unset($_SESSION['errorMessage']);
+                }
+              ?>
               <div class="form-group">
                 <label>Otium Token</label>
-                <input type="text" class="form-control" value="<?php echo $token; ?>" placeholder="token" readonly>
+                <input type="text" class="form-control" name="token" value="<?php echo $token; ?>" placeholder="token" readonly>
               </div>
               <div class="form-group">
                 <label>Full Name</label>
-                <input type="text" class="form-control" placeholder="John Doe">
+                <input type="text" name="name" class="form-control" placeholder="John Doe">
               </div>
               <div class="form-group">
                 <label>Email Address</label>
-                <input type="email" class="form-control" placeholder="yourname@yourmail.com">
+                <input type="email" name="email" class="form-control" placeholder="yourname@yourmail.com">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" name="phone" class="form-control" placeholder="+234xxxxxxxxxx">
               </div>
               <div class="form-group">
                 <label>Choose Gender</label>
-                <select class="form-control">
+                <select class="form-control" name="gender">
                   <option value="Gender" disabled selected>Select Gender</option>
                   <option value="Male">Male</option>
                   <option value="Female">Female</option>
@@ -114,11 +124,11 @@
                 <div class="d-flex justify-content-between mg-b-5">
                   <label class="mg-b-0-f">Password</label>
                 </div>
-                <input type="password" class="form-control" placeholder="Enter your password">
+                <input type="password" name="password" class="form-control" placeholder="Enter your password">
               </div>
               <button class="btn btn-brand-02 btn-block">Activate My Otiumcard</button>
               <div class="tx-13 mg-t-20 tx-center">Something is wrong? <a href="<?php echo APP_URL . '' ?> mailto:support@otiumcards.com">Contact Support</a></div>
-            </div>
+            </form>
           </div><!-- sign-wrapper -->
         </div><!-- media -->
       </div><!-- container -->

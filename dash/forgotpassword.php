@@ -26,8 +26,8 @@
     <meta property="og:image:height" content="600">
 
     <!-- Meta -->
-    <meta name="description" content="Responsive Bootstrap 4 Dashboard Template">
-    <meta name="author" content="ThemePixels">
+    <meta name="description" content="">
+    <meta name="author" content="Otiumcards">
 
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="./assets/img/favicon.png">
