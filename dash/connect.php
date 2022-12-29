@@ -15,6 +15,9 @@
   $user = new Users($conn);
   $contacts = new Contacts($conn);
   $nick = (empty($_GET['nick'])) ? null : $_GET['nick'] ;
+  if ($nick === null) {
+    die("Invalid connection link");
+  }
   $nick = $otium->cleanurl($nick);
   $userdata = $user->connectNickUserData($nick);
 ?>
