@@ -14,9 +14,6 @@
   $errno = new Errno($conn);
   $user = new Users($conn);
   $contacts = new Contacts($conn);
-  if (!isset($_SESSION['userID'])) {
-    header("location: ./login");
-  }
   $nick = (empty($_GET['nick'])) ? null : $_GET['nick'] ;
   $nick = $otium->cleanurl($nick);
   $userdata = $user->connectNickUserData($nick);
