@@ -82,7 +82,7 @@
                         <li class="breadcrumb-item"><a href="#">Hi There 👋🏽</a></li>
                     </ol>
                 </nav>
-                <h4 class="mg-b-30">I'm <?php echo $userdata['name'] ?>, Would like to have your contact Information</h4>
+                <h4 class="mg-b-30">I'm <?php echo (isset($userdata['name'])) ? $userdata['name'] : NULL ; ?>, Would like to have your contact Information</h4>
             </div><!-- row -->
         </div><!-- container -->
         <div class="col-sm col-lg-6 offset-sm-3">
