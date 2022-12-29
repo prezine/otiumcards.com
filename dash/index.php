@@ -217,7 +217,7 @@
                             <td class="tx-medium text-right">'. $ac['contactName'] .'</td>
                             <td class="text-right tx-teal">'. $ac['contactEmail'] .'</td>
                             <td class="text-right tx-pink">'. $ac['contactPhone'] .'</td>
-                            <td class="tx-medium text-right">'. $ac['contactRole'] .'</td>
+                            <td class="tx-medium text-right">'. $ac['contactRole'] .', '. $ac['contactCompany'].'</td>
                           </tr>';
                         }
                       }

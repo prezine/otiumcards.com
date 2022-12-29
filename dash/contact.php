@@ -116,9 +116,9 @@
                     echo 
                     '<tr>
                       <td class="tx-color-03 tx-normal">'. $otium->time_elapsed_string($ac['dateAdded']) .'</td>
-                      <td class="tx-medium text-right">'. $ac['contactName'] .'</td>
-                      <td class="text-right tx-teal">'. $ac['contactEmail'] .'</td>
-                      <td class="text-right tx-pink">'. $ac['contactPhone'] .'</td>
+                      <td class="tx-medium text-left">'. $ac['contactName'] .'</td>
+                      <td class="text-left tx-teal">'. $ac['contactEmail'] .'</td>
+                      <td class="text-left tx-pink">'. $ac['contactPhone'] .'</td>
                       <td>
                         <button class="btn btn-sm pd-x-15 btn-primary btn-uppercase mg-l-5">View more <i data-feather="arrow-right" class="wd-10 mg-r-5"></i></button>
                       </td>
