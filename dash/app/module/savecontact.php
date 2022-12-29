@@ -26,13 +26,14 @@
             'dateAdded' => GLOBAL_DATE									
         );
         $contacts = $auth->saveContact($contactData);
-        if ($contacts == 200) {
-            $errorHtml = $errno->error('success', 'Great Job, your contact information has been saved successfully');
-            $otium->setSession('errorMessage', $errorHtml);
-            header("Location: ". $_SERVER['HTTP_REFERER']);
-        } else {
-            $errorHtml = $errno->error('danger', 'Unable to save your contact information, try again soon');
-            $otium->setSession('errorMessage', $errorHtml);
-            header("Location: ". $_SERVER['HTTP_REFERER']);
-        }
+        echo $contacts;
+        // if ($contacts == 200) {
+        //     $errorHtml = $errno->error('success', 'Great Job, your contact information has been saved successfully');
+        //     $otium->setSession('errorMessage', $errorHtml);
+        //     header("Location: ". $_SERVER['HTTP_REFERER']);
+        // } else {
+        //     $errorHtml = $errno->error('danger', 'Unable to save your contact information, try again soon');
+        //     $otium->setSession('errorMessage', $errorHtml);
+        //     header("Location: ". $_SERVER['HTTP_REFERER']);
+        // }
     }
