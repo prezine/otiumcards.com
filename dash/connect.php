@@ -52,7 +52,7 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
-    <title><?php echo $userdata['name']; ?> | Collect Contact</title>
+    <title><?php echo (isset($userdata['name'])) ? $userdata['name'] : NULL ; ?> | Collect Contact</title>
 
     <!-- vendor css -->
     <link href="<?php echo APP_URL . 'lib/@fortawesome/fontawesome-free/css/all.min.css'?>" rel="stylesheet">
