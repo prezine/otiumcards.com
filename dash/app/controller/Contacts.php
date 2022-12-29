@@ -13,9 +13,8 @@
 		{
 			return $this->insert('ot_contact', $data);
 		}
-		public function fetchContactList()
+		public function fetchContactList($token = '')
 		{
-			$userID = $this->getSession('userID');
-			return $this->select("SELECT * FROM ot_contact WHERE userID='$userID'", false, true);
+			return $this->select("SELECT * FROM ot_contact WHERE token='$token'", false, true);
 		}
 	}

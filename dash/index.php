@@ -110,7 +110,7 @@
             <div class="card card-body">
               <h6 class="tx-uppercase tx-11 tx-spacing-1 tx-color-02 tx-semibold mg-b-8">Total Contact Count</h6>
               <div class="d-flex d-lg-block d-xl-flex align-items-end">
-                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1"><?php echo $user->countTotalContacts(); ?></h3>
+                <h3 class="tx-normal tx-rubik mg-b-0 mg-r-5 lh-1"><?php echo $user->countTotalContacts($token); ?></h3>
                 <p class="tx-11 tx-color-03 mg-b-0"><span class="tx-medium tx-danger">0% <i class="icon ion-md-arrow-down"></i></span> than last week</p>
               </div>
             </div>
@@ -172,7 +172,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Women</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('female'); ?></h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender($token, 'female'); ?></h4>
                     </div>
                   </div>
                   <div class="media mg-t-20 mg-sm-t-0 mg-sm-l-15 mg-md-l-40">
@@ -181,7 +181,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Men</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('male'); ?></h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender($token, 'male'); ?></h4>
                     </div>
                   </div>
                   <div class="media mg-t-20 mg-sm-t-0 mg-sm-l-15 mg-md-l-40">
@@ -190,7 +190,7 @@
                     </div>
                     <div class="media-body">
                       <h6 class="tx-sans tx-uppercase tx-10 tx-spacing-1 tx-color-03 tx-semibold mg-b-5 mg-md-b-8">Total Non-binary</h6>
-                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender('custom'); ?></h4>
+                      <h4 class="tx-20 tx-sm-18 tx-md-24 tx-normal tx-rubik mg-b-0"><?php echo $user->countTotalContactsGender($token, 'custom'); ?></h4>
                     </div>
                   </div>
                 </div>
@@ -208,12 +208,12 @@
                   </thead>
                   <tbody>
                     <?php
-                      if ($contacts->fetchContactList() !== null) {
-                        $allcontacts = json_decode($contacts->fetchContactList(), true);
+                      if ($contacts->fetchContactList($token) !== null) {
+                        $allcontacts = $contacts->fetchContactList($token);
                         foreach ($allcontacts as $ac) {
                           echo 
                           '<tr>
-                            <td class="tx-color-03 tx-normal">'. $ac['dateAdded'] .'</td>
+                            <td class="tx-color-03 tx-normal">'. $otium->time_elapsed_string($ac['dateAdded']) .'</td>
                             <td class="tx-medium text-right">'. $ac['contactName'] .'</td>
                             <td class="text-right tx-teal">'. $ac['contactEmail'] .'</td>
                             <td class="text-right tx-pink">'. $ac['contactPhone'] .'</td>

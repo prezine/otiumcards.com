@@ -110,12 +110,12 @@
             </thead>
             <tbody>
               <?php
-                if ($contacts->fetchContactList() !== null) {
-                  $allcontacts = json_decode($contacts->fetchContactList(), true);
+                if ($contacts->fetchContactList($token) !== null) {
+                  $allcontacts = $contacts->fetchContactList($token);
                   foreach ($allcontacts as $ac) {
                     echo 
                     '<tr>
-                      <td class="tx-color-03 tx-normal">'. $ac['dateAdded'] .'</td>
+                      <td class="tx-color-03 tx-normal">'. $otium->time_elapsed_string($ac['dateAdded']) .'</td>
                       <td class="tx-medium text-right">'. $ac['contactName'] .'</td>
                       <td class="text-right tx-teal">'. $ac['contactEmail'] .'</td>
                       <td class="text-right tx-pink">'. $ac['contactPhone'] .'</td>

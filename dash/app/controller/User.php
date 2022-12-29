@@ -13,14 +13,16 @@
 		{
 			return $this->select("SELECT * FROM ot_users WHERE userID = '$userID'");
 		}
-		public function countTotalContacts()
+		public function countTotalContacts($token = '')
 		{
-			$userID = $this->getSession('userID');
-			return $this->select("SELECT COUNT(*) FROM ot_contact WHERE userID='$userID'", false)['COUNT(*)'];
+			return $this->select("SELECT COUNT(*) FROM ot_contact WHERE token='$token'", false)['COUNT(*)'];
 		}
-		public function countTotalContactsGender($gender = '')
+		public function countTotalContactsGender($token = '', $gender = '')
 		{
-			$userID = $this->getSession('userID');
-			return $this->select("SELECT COUNT(*) FROM ot_contact WHERE userID='$userID' AND contactGender='$gender'", false)['COUNT(*)'];
+			return $this->select("SELECT COUNT(*) FROM ot_contact WHERE token='$token' AND contactGender='$gender'", false)['COUNT(*)'];
+		}
+		function connectNickUserData($nick_token = '')
+		{
+			return $this->select("SELECT * FROM ot_users WHERE nick='$nick_token' OR token='$nick_token'", false);
 		}
 	}

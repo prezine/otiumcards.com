@@ -14,10 +14,12 @@
   $errno = new Errno($conn);
   $user = new Users($conn);
   $contacts = new Contacts($conn);
-  include_once './app/module/userdata.php';
   if (!isset($_SESSION['userID'])) {
     header("location: ./login");
   }
+  $nick = (empty($_GET['nick'])) ? null : $_GET['nick'] ;
+  $nick = $otium->cleanurl($nick);
+  $userdata = $user->connectNickUserData($nick);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -53,25 +55,25 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="assets/img/favicon.png">
 
-    <title>Collect Contact</title>
+    <title><?php echo $userdata['name']; ?> | Collect Contact</title>
 
     <!-- vendor css -->
-    <link href="lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-    <link href="lib/jqvmap/jqvmap.min.css" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/@fortawesome/fontawesome-free/css/all.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/ionicons/css/ionicons.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/jqvmap/jqvmap.min.css'?>" rel="stylesheet">
 
-    <link href="lib/@fortawesome/fontawesome-free/css/all.min.css" rel="stylesheet">
-    <link href="lib/ionicons/css/ionicons.min.css" rel="stylesheet">
-    <link href="lib/typicons.font/typicons.css" rel="stylesheet">
-    <link href="lib/prismjs/themes/prism-vs.css" rel="stylesheet">
-    <link href="lib/datatables.net-dt/css/jquery.dataTables.min.css" rel="stylesheet">
-    <link href="lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css" rel="stylesheet">
-    <link href="lib/select2/css/select2.min.css" rel="stylesheet">
-    <link href="assets/css/custom.css" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/@fortawesome/fontawesome-free/css/all.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/ionicons/css/ionicons.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/typicons.font/typicons.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/prismjs/themes/prism-vs.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/datatables.net-dt/css/jquery.dataTables.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/datatables.net-responsive-dt/css/responsive.dataTables.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'lib/select2/css/select2.min.css'?>" rel="stylesheet">
+    <link href="<?php echo APP_URL . 'assets/css/custom.css'?>" rel="stylesheet">
 
     <!-- DashForge CSS -->
-    <link rel="stylesheet" href="assets/css/dashforge.css">
-    <link rel="stylesheet" href="assets/css/dashforge.dashboard.css">
+    <link rel="stylesheet" href="<?php echo APP_URL . 'assets/css/dashforge.css'?>">
+    <link rel="stylesheet" href="<?php echo APP_URL . 'assets/css/dashforge.dashboard.css'?>">
   </head>
   <body class="page-profile bg-pandascrow">
 
@@ -83,64 +85,71 @@
                         <li class="breadcrumb-item"><a href="#">Hi There 👋🏽</a></li>
                     </ol>
                 </nav>
-                <h4 class="mg-b-30">I'm Tom Precious, Would like to have your contact Information</h4>
+                <h4 class="mg-b-30">I'm <?php echo $userdata['name'] ?>, Would like to have your contact Information</h4>
             </div><!-- row -->
         </div><!-- container -->
         <div class="col-sm col-lg-6 offset-sm-3">
             <div class="col-sm-12 col-xl-12">
-                <form href="#form m-2 bg-pandascrow ht-500 mg-b-15">
-                    <div class="form-group">
-                      <label for="formGroupExampleInput" class="d-block">Fullname *</label>
-                      <input type="text" class="form-control" placeholder="Enter your fullname" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="formGroupExampleInput2" class="d-block">Email *</label>
-                      <input type="email" class="form-control" placeholder="Enter your email address" required>
-                    </div>
-                    <div class="form-group">
-                      <label for="formGroupExampleInput" class="d-block">Phone *</label>
-                      <input type="tel" class="form-control" placeholder="Enter your phone number" required>
-                    </div>
-                    <div class="form-group">
-                    <label for="custom-select" class="d-block">Select your gender *</label>
-                    <select class="custom-select" required>
-                      <option selected>Choose gender</option>
-                      <option value="male">Male</option>
-                      <option value="female">Female</option>
-                      <option value="custom">Custom</option>
-                    </select>
-                    </div>
-                    <div class="form-group">
-                      <label for="formGroupExampleInput" class="d-block" required>Profession *</label>
-                      <input type="text" class="form-control" placeholder="Enter your profession">
-                    </div>
-                    <div class="form-group">
-                      <label for="formGroupExampleInput2" class="d-block">Company (optional)</label>
-                      <input type="text" class="form-control" placeholder="Enter where you work">
-                    </div>
-                    <button class="btn btn-primary" type="submit">Save Contact Details</button>
-                    <button class="btn btn-secondary" type="reset">Reset Form</button>
+                <form action="../app/module/savecontact" method="POST" href="#form m-2 bg-pandascrow ht-500 mg-b-15">
+                  <?php 
+                    if (isset($_SESSION['errorMessage'])) {
+                      echo $_SESSION['errorMessage'];
+                      unset($_SESSION['errorMessage']);
+                    }
+                  ?>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput" class="d-block">Fullname *</label>
+                    <input type="text" name="fullname" class="form-control" placeholder="Enter your fullname" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput2" class="d-block">Email *</label>
+                    <input type="email" name="email" class="form-control" placeholder="Enter your email address" required>
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput" class="d-block">Phone *</label>
+                    <input type="tel" name="phone" class="form-control" placeholder="Enter your phone number" required>
+                  </div>
+                  <div class="form-group">
+                  <label for="custom-select" class="d-block">Select your gender *</label>
+                  <select name="gender" class="custom-select" required>
+                    <option selected>Choose gender</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="custom">Custom</option>
+                  </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput" class="d-block" required>Profession *</label>
+                    <input type="text" name="role" class="form-control" placeholder="Enter your profession">
+                  </div>
+                  <div class="form-group">
+                    <label for="formGroupExampleInput2" class="d-block">Company (optional)</label>
+                    <input type="text" name="company" class="form-control" placeholder="Enter where you work">
+                  </div>
+                  <input type="hidden" name="token" value="<?php echo $token ?>">
+                  <button class="btn btn-primary" type="submit">Save Contact Details</button>
+                  <button class="btn btn-secondary" type="reset">Reset Form</button>
                 </form>
             </div>
         </div>
     </div><!-- content -->
 
-    <script src="lib/jquery/jquery.min.js"></script>
-    <script src="lib/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <script src="lib/feather-icons/feather.min.js"></script>
-    <script src="lib/perfect-scrollbar/perfect-scrollbar.min.js"></script>
-    <script src="lib/prismjs/prism.js"></script>
-    <script src="lib/datatables.net/js/jquery.dataTables.min.js"></script>
-    <script src="lib/datatables.net-dt/js/dataTables.dataTables.min.js"></script>
-    <script src="lib/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-    <script src="lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js"></script>
-    <script src="lib/select2/js/select2.min.js"></script>
-    <script src="lib/jquery.flot/jquery.flot.js"></script>
-    <script src="lib/jquery.flot/jquery.flot.stack.js"></script>
-    <script src="lib/jquery.flot/jquery.flot.resize.js"></script>
-    <script src="lib/chart.js/Chart.bundle.min.js"></script>
-    <script src="lib/jqvmap/jquery.vmap.min.js"></script>
-    <script src="lib/jqvmap/maps/jquery.vmap.usa.js"></script>
+    <script src="<?php echo APP_URL . 'lib/jquery/jquery.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/bootstrap/js/bootstrap.bundle.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/feather-icons/feather.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/perfect-scrollbar/perfect-scrollbar.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/prismjs/prism.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/datatables.net/js/jquery.dataTables.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/datatables.net-dt/js/dataTables.dataTables.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/datatables.net-responsive/js/dataTables.responsive.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/datatables.net-responsive-dt/js/responsive.dataTables.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/select2/js/select2.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/jquery.flot/jquery.flot.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/jquery.flot/jquery.flot.stack.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/jquery.flot/jquery.flot.resize.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/chart.js/Chart.bundle.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/jqvmap/jquery.vmap.min.js'?>"></script>
+    <script src="<?php echo APP_URL . 'lib/jqvmap/maps/jquery.vmap.usa.js'?>"></script>
 
     <script>
       $(function() {
