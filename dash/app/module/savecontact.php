@@ -26,7 +26,7 @@
             'dateAdded' => GLOBAL_DATE									
         );
         $contacts = $auth->saveContact($contactData);
-        echo $contacts;
+        echo json_encode($contactData, true);
         // if ($contacts == 200) {
         //     $errorHtml = $errno->error('success', 'Great Job, your contact information has been saved successfully');
         //     $otium->setSession('errorMessage', $errorHtml);
