@@ -123,7 +123,7 @@
                     <label for="formGroupExampleInput2" class="d-block">Company (optional)</label>
                     <input type="text" name="company" class="form-control" placeholder="Enter where you work">
                   </div>
-                  <input type="hidden" name="token" value="<?php echo $token ?>">
+                  <input type="hidden" name="token" value="<?php echo $userdata['token']; ?>">
                   <button class="btn btn-primary" type="submit">Save Contact Details</button>
                   <button class="btn btn-secondary" type="reset">Reset Form</button>
                 </form>
