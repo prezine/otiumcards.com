@@ -138,20 +138,8 @@
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="tx-medium">Rivers</td>
-                        <td class="text-right">12,201</td>
-                      </tr>
-                      <tr>
-                        <td class="tx-medium">Bayelsa</td>
-                        <td class="text-right">11,198</td>
-                      </tr>
-                      <tr>
-                        <td class="tx-medium">Akwa Ibom</td>
-                        <td class="text-right">9,885</td>
-                      </tr>
-                      <tr>
-                        <td class="tx-medium">Others</td>
-                        <td class="text-right">2,950</td>
+                        <td class="tx-medium">No State</td>
+                        <td class="text-right">-</td>
                       </tr>
                     </tbody>
                   </table>
