@@ -23,7 +23,7 @@
             'is_deleted' => 0,
             'groupID' => 0,
             'token' => (isset($_POST['token'])) ? trim($_POST['token']) : null,
-            'dateAdded' => GLOBAL_DATE									
+            'dateAdded' => GLOBAL_DATE
         );
         $contacts = $auth->saveContact($contactData);
         if ($contacts == 200) {

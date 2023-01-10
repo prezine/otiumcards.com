@@ -80,9 +80,12 @@
 						
 						<div class="right-widget d-flex align-items-center">
 							<button class="contact-fancy-btn" data-bs-toggle="modal" data-bs-target="#orderModal">
-							  <em>Join</em> <span>OC</span> <i class="bi bi-arrow-up-right"></i>
+							  <em>Purchase</em> <span>OC</span> <i class="bi bi-arrow-up-right"></i>
 							</button>
 						</div> <!-- /.right-widget -->
+						<div>
+							<a href="./dash/login" class="">Login</a>
+						</div>
 					</div>
 				</div> <!-- /.inner-content -->
 			</header> <!-- /.theme-main-menu -->

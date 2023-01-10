@@ -200,10 +200,6 @@
       });
     </script>
 
-    <script src="assets/js/dashforge.js"></script>
-    <script src="assets/js/dashforge.sampledata.js"></script>
-    <script src="assets/js/dashboard-one.js"></script>
-
     <!-- append theme customizer -->
     <script src="lib/js-cookie/js.cookie.js"></script>
     <script src="assets/js/dashforge.settings.js"></script>

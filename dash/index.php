@@ -22,7 +22,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -243,10 +242,6 @@
     <script src="lib/chart.js/Chart.bundle.min.js"></script>
     <script src="lib/jqvmap/jquery.vmap.min.js"></script>
     <script src="lib/jqvmap/maps/jquery.vmap.usa.js"></script>
-
-    <script src="assets/js/dashforge.js"></script>
-    <script src="assets/js/dashforge.sampledata.js"></script>
-    <script src="assets/js/dashboard-one.js"></script>
 
     <!-- append theme customizer -->
     <script src="lib/js-cookie/js.cookie.js"></script>

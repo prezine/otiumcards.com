@@ -29,4 +29,8 @@
 		{
 			return $this->insert('ot_contact', $contactData);
 		}
+		public function updateProfile($userData = '')
+		{
+			return $this->update("UPDATE ot_users SET name='{$userData['name']}', email='{$userData['email']}', gender='{$userData['gender']}', phone='{$userData['phone']}', dob='{$userData['dob']}', nick='{$userData['nick']}' WHERE userID=". $userData['userID']);
+		}
 	}

@@ -24,7 +24,7 @@
             <a href="./contact" class="nav-link"><i data-feather="layers"></i> My Contacts</a>
         </li>
         <li class="nav-item <?php echo $uri['settings'] ?>">
-            <a href="#" class="nav-link"><i data-feather="layers"></i> Settings</a>
+            <a href="./setting" class="nav-link"><i data-feather="layers"></i> Settings</a>
         </li>
     </ul>
     </div><!-- navbar-menu-wrapper -->
